@@ -1,0 +1,302 @@
+{
+  "version": 1,
+  "note": "原理实体：理解机制必须引入、但用户通常不会主动提到的中介。它们不可见或不可直感，所以要靠形式而非写实来画。这类条目复用率最高——建 30 个能覆盖上百个话题。",
+  "entities": [
+    {
+      "id": "photon",
+      "name": "光子",
+      "aliases": ["光线", "光束", "光量子", "photon"],
+      "kind": "particle",
+      "part": "custom",
+      "custom": { "form": "cluster", "detail": "none", "size": [1.2, 0.9, 1.2], "color": "#fbeec2", "accent": "#d9a83c" },
+      "scale": "micro",
+      "note": "小球群 + 暖色。不要画成光柱（光柱是 beam，那是宏观的）"
+    },
+    {
+      "id": "molecule",
+      "name": "分子",
+      "aliases": ["空气分子", "氮气", "氧气分子", "粒子", "molecule"],
+      "kind": "particle",
+      "part": "custom",
+      "custom": { "form": "cluster", "detail": "none", "size": [1.3, 1.0, 1.3], "color": "#cfe3f5", "accent": "#5b8fc9" },
+      "scale": "micro",
+      "note": "关键：必须画成一堆小球，不能画成一个实心块——否则观众以为分子是方的"
+    },
+    {
+      "id": "caffeine-molecule",
+      "name": "咖啡因分子",
+      "aliases": ["咖啡因", "caffeine"],
+      "kind": "particle",
+      "part": "custom",
+      "custom": { "form": "cluster", "detail": "none", "size": [1.3, 1.05, 1.3], "color": "#cfe3f5", "accent": "#5b8fc9" },
+      "scale": "micro"
+    },
+    {
+      "id": "adenosine-receptor",
+      "name": "腺苷受体",
+      "aliases": ["受体", "A1", "A2A", "receptor"],
+      "kind": "particle",
+      "part": "custom",
+      "custom": { "form": "cluster", "detail": "none", "size": [1.15, 0.95, 1.15], "color": "#e3d9f0", "accent": "#8b6fb0" },
+      "scale": "micro",
+      "note": "受体群，用紫色和普通分子区分开：一个是钥匙，一个是锁"
+    },
+    {
+      "id": "blood-brain-barrier",
+      "name": "血脑屏障",
+      "aliases": ["脑屏障", "BBB", "blood brain barrier"],
+      "kind": "structure",
+      "part": "custom",
+      "custom": { "form": "membrane", "detail": "none", "size": [2.0, 1.25, 1.15], "color": "#f0d4cf", "accent": "#c9877f" },
+      "scale": "micro",
+      "note": "两片墙 + 中间的通道，读作「过滤」而不是「一堵墙」"
+    },
+    {
+      "id": "cell-membrane",
+      "name": "细胞膜",
+      "aliases": ["膜", "细胞壁", "membrane"],
+      "kind": "structure",
+      "part": "custom",
+      "custom": { "form": "membrane", "detail": "none", "size": [1.9, 1.1, 1.0], "color": "#e7e2cf", "accent": "#a8927a" },
+      "scale": "micro"
+    },
+    {
+      "id": "electron",
+      "name": "电子",
+      "aliases": ["自由电子", "electron"],
+      "kind": "particle",
+      "part": "custom",
+      "custom": { "form": "cluster", "detail": "none", "size": [1.0, 0.85, 1.0], "color": "#d8e8f8", "accent": "#3a7bd5" },
+      "scale": "micro"
+    },
+    {
+      "id": "wavelength",
+      "name": "波长",
+      "aliases": ["频率", "光谱", "可见光", "wavelength"],
+      "kind": "data",
+      "part": "custom",
+      "custom": { "form": "bars", "detail": "none", "size": [1.8, 1.05, 0.85], "color": "#dfe8f2", "accent": "#4f7fb5" },
+      "scale": "micro",
+      "note": "柱状表达「不同波长强度不同」最直观；不要用文字牌代替"
+    },
+    {
+      "id": "field",
+      "name": "场",
+      "aliases": ["力场", "电场", "磁场", "引力场", "field"],
+      "kind": "signal",
+      "part": "custom",
+      "custom": { "form": "field", "detail": "none", "size": [1.8, 1.1, 1.4], "color": "#dbe7f5", "accent": "#2b6cb0" },
+      "scale": "small",
+      "note": "场线。看不见的东西用「线」表达，别试图给它一个实体外形"
+    },
+    {
+      "id": "rayleigh-scattering",
+      "name": "瑞利散射",
+      "aliases": ["散射", "rayleigh", "scattering"],
+      "kind": "signal",
+      "part": "custom",
+      "custom": { "form": "field", "detail": "none", "size": [2.0, 1.1, 1.6], "color": "#bcd4ea", "accent": "#2b6cb0" },
+      "scale": "micro"
+    },
+    {
+      "id": "energy",
+      "name": "能量",
+      "aliases": ["势能", "动能", "能量流", "energy"],
+      "kind": "signal",
+      "part": "custom",
+      "custom": { "form": "field", "detail": "none", "size": [1.7, 1.2, 1.3], "color": "#fbeeda", "accent": "#c98a2e" },
+      "scale": "small"
+    },
+    {
+      "id": "heat",
+      "name": "热",
+      "aliases": ["温度", "热量", "废热", "heat"],
+      "kind": "signal",
+      "part": "custom",
+      "custom": { "form": "field", "detail": "none", "size": [1.6, 1.0, 1.2], "color": "#f8dcd2", "accent": "#c2603c" },
+      "scale": "small"
+    },
+    {
+      "id": "pressure",
+      "name": "压力",
+      "aliases": ["压强", "气压", "pressure"],
+      "kind": "data",
+      "part": "custom",
+      "custom": { "form": "bars", "detail": "none", "size": [1.6, 1.0, 0.85], "color": "#dfe6ee", "accent": "#5b6b85" },
+      "scale": "small"
+    },
+    {
+      "id": "concentration",
+      "name": "浓度",
+      "aliases": ["剂量", "含量", "浓度差", "concentration"],
+      "kind": "data",
+      "part": "custom",
+      "custom": { "form": "bars", "detail": "none", "size": [1.5, 0.95, 0.85], "color": "#e2e8f0", "accent": "#6f8ab0" },
+      "scale": "micro",
+      "note": "差异用柱高表达，比画一堆小球更清楚"
+    },
+    {
+      "id": "probability",
+      "name": "概率",
+      "aliases": ["概率分布", "可能性", "probability"],
+      "kind": "data",
+      "part": "custom",
+      "custom": { "form": "bars", "detail": "none", "size": [1.6, 1.0, 0.85], "color": "#e4e6f0", "accent": "#7a7fb0" },
+      "scale": "small"
+    },
+    {
+      "id": "logits",
+      "name": "打分 logits",
+      "aliases": ["logits", "分数", "打分"],
+      "kind": "data",
+      "part": "custom",
+      "custom": { "form": "bars", "detail": "none", "size": [1.7, 1.05, 0.85], "color": "#e3e9f3", "accent": "#5b7fae" },
+      "scale": "small"
+    },
+    {
+      "id": "token",
+      "name": "token",
+      "aliases": ["词元", "切分块", "token"],
+      "kind": "data",
+      "part": "custom",
+      "custom": { "form": "stack", "detail": "groove", "size": [0.75, 0.9, 0.75], "color": "#dfe9f5", "accent": "#6f8ab0" },
+      "scale": "small",
+      "note": "一叠小块表示序列，比单个方块更能读出「一个一个」"
+    },
+    {
+      "id": "attention",
+      "name": "注意力",
+      "aliases": ["attention", "注意力权重"],
+      "kind": "signal",
+      "part": "custom",
+      "custom": { "form": "field", "detail": "none", "size": [1.9, 1.0, 1.5], "color": "#e6e2f5", "accent": "#7a6fb0" },
+      "scale": "small"
+    },
+    {
+      "id": "cache",
+      "name": "缓存",
+      "aliases": ["KV cache", "cache", "显存缓存"],
+      "kind": "data",
+      "part": "custom",
+      "custom": { "form": "stack", "detail": "none", "size": [1.1, 0.8, 0.9], "color": "#e2ecf5", "accent": "#5b8fc9" },
+      "scale": "small"
+    },
+    {
+      "id": "queue",
+      "name": "队列",
+      "aliases": ["排队", "任务队列", "queue"],
+      "kind": "data",
+      "part": "custom",
+      "custom": { "form": "stack", "detail": "groove", "size": [0.7, 1.1, 0.7], "color": "#e6e9ef", "accent": "#8a93a3" },
+      "scale": "small"
+    },
+    {
+      "id": "latency",
+      "name": "延迟",
+      "aliases": ["耗时", "响应时间", "latency"],
+      "kind": "data",
+      "part": "custom",
+      "custom": { "form": "bars", "detail": "none", "size": [1.6, 0.9, 0.8], "color": "#e8eaf2", "accent": "#6f7fa8" },
+      "scale": "small"
+    },
+    {
+      "id": "glucose",
+      "name": "葡萄糖",
+      "aliases": ["糖", "血糖", "glucose"],
+      "kind": "particle",
+      "part": "custom",
+      "custom": { "form": "cluster", "detail": "none", "size": [1.0, 0.85, 1.0], "color": "#f6eccf", "accent": "#c9a44c" },
+      "scale": "micro"
+    },
+    {
+      "id": "oxygen",
+      "name": "氧气",
+      "aliases": ["O2", "氧", "oxygen"],
+      "kind": "particle",
+      "part": "custom",
+      "custom": { "form": "cluster", "detail": "none", "size": [1.1, 0.9, 1.1], "color": "#dceff0", "accent": "#4f9aa0" },
+      "scale": "micro"
+    },
+    {
+      "id": "co2",
+      "name": "二氧化碳",
+      "aliases": ["CO2", "碳排", "carbon dioxide"],
+      "kind": "particle",
+      "part": "custom",
+      "custom": { "form": "cluster", "detail": "none", "size": [1.1, 0.9, 1.1], "color": "#e4e6e0", "accent": "#7d8478" },
+      "scale": "micro"
+    },
+    {
+      "id": "chlorophyll",
+      "name": "叶绿素",
+      "aliases": ["色素", "chlorophyll"],
+      "kind": "particle",
+      "part": "custom",
+      "custom": { "form": "cluster", "detail": "none", "size": [1.0, 0.85, 1.0], "color": "#cfe0ab", "accent": "#5b8c2e" },
+      "scale": "micro"
+    },
+    {
+      "id": "enzyme",
+      "name": "酶",
+      "aliases": ["催化剂", "enzyme", "catalyst"],
+      "kind": "particle",
+      "part": "custom",
+      "custom": { "form": "cluster", "detail": "none", "size": [1.1, 0.9, 1.1], "color": "#e6e0f0", "accent": "#8b6fb0" },
+      "scale": "micro"
+    },
+    {
+      "id": "atp",
+      "name": "ATP",
+      "aliases": ["能量货币", "ATP"],
+      "kind": "particle",
+      "part": "custom",
+      "custom": { "form": "cluster", "detail": "none", "size": [0.9, 0.8, 0.9], "color": "#fbeeda", "accent": "#c98a2e" },
+      "scale": "micro"
+    },
+    {
+      "id": "carrier",
+      "name": "载体",
+      "aliases": ["转运蛋白", "载体蛋白", "carrier"],
+      "kind": "particle",
+      "part": "custom",
+      "custom": { "form": "membrane", "detail": "none", "size": [1.5, 0.95, 0.9], "color": "#e2ecef", "accent": "#5f8f99" },
+      "scale": "micro"
+    },
+    {
+      "id": "antibody",
+      "name": "抗体",
+      "aliases": ["免疫球蛋白", "antibody"],
+      "kind": "particle",
+      "part": "custom",
+      "custom": { "form": "cluster", "detail": "none", "size": [1.1, 0.9, 1.1], "color": "#e4ecf7", "accent": "#4f7fb5" },
+      "scale": "micro"
+    },
+    {
+      "id": "neurotransmitter",
+      "name": "神经递质",
+      "aliases": ["递质", "多巴胺", "腺苷", "neurotransmitter"],
+      "kind": "particle",
+      "part": "custom",
+      "custom": { "form": "cluster", "detail": "none", "size": [1.0, 0.85, 1.0], "color": "#dcefe4", "accent": "#4f9a72" },
+      "scale": "micro"
+    },
+    {
+      "id": "entropy",
+      "name": "熵",
+      "aliases": ["无序度", "entropy"],
+      "kind": "data",
+      "part": "custom",
+      "custom": { "form": "bars", "detail": "none", "size": [1.5, 0.9, 0.8], "color": "#e6e6ee", "accent": "#7a7a99" },
+      "scale": "small"
+    },
+    {
+      "id": "logistics-route",
+      "name": "运输路径",
+      "aliases": ["配送路线", "路径", "route"],
+      "kind": "signal",
+      "part": "custom",
+      "custom": { "form": "field", "detail": "none", "size": [2.0, 0.7, 1.6], "color": "#e4eaf2", "accent": "#6f8ab0" },
+      "scale": "large"
+    }
+  ]
+}

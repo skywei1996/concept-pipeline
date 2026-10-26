@@ -1,0 +1,469 @@
+{
+  "version": 1,
+  "note": "话题实体：世界里看得见的具体东西。id 一旦使用不要再改，它会被写进 concept 的 entity 字段。",
+  "kindHelp": "device 器械 / material 物料 / vessel 容器 / organism 生命 / particle 微粒 / signal 波场 / structure 结构场所 / data 数据抽象 / agent 人与组织",
+  "entities": [
+    {
+      "id": "desk",
+      "name": "桌面",
+      "aliases": ["桌子", "工作台", "书桌", "desk"],
+      "kind": "structure",
+      "part": "custom",
+      "custom": { "form": "frame", "detail": "none", "size": [1.8, 1.0, 1.1], "color": "#f2efe6", "accent": "#b9a48c" },
+      "stage": ["desk"],
+      "scale": "human",
+      "note": "台面 + 四条腿，读作工作台"
+    },
+    {
+      "id": "laptop",
+      "name": "笔记本",
+      "aliases": ["电脑", "笔记本电电脑", "laptop", "PC"],
+      "kind": "device",
+      "part": "custom",
+      "custom": { "form": "slab", "detail": "screen", "size": [1.3, 0.12, 0.95], "color": "#dfe3ea", "accent": "#8e97a6" },
+      "stage": ["desk"],
+      "scale": "small",
+      "note": "薄板 + 屏幕，比 box 更像摊开的电脑"
+    },
+    {
+      "id": "cpu",
+      "name": "CPU",
+      "aliases": ["处理器", "中央处理器", "cpu", "控制器"],
+      "kind": "device",
+      "part": "cpu",
+      "stage": ["desk", "datacenter"],
+      "scale": "small"
+    },
+    {
+      "id": "gpu",
+      "name": "GPU",
+      "aliases": ["显卡", "加速卡", "GPU卡", "H100", "A100", "图形处理器"],
+      "kind": "device",
+      "part": "gpu",
+      "stage": ["desk", "datacenter"],
+      "scale": "small"
+    },
+    {
+      "id": "ram",
+      "name": "内存",
+      "aliases": ["内存条", "缓存", "ram", "memory"],
+      "kind": "device",
+      "part": "ram",
+      "stage": ["desk", "datacenter"],
+      "scale": "small"
+    },
+    {
+      "id": "monitor",
+      "name": "显示器",
+      "aliases": ["屏幕", "界面", "monitor", "screen"],
+      "kind": "device",
+      "part": "monitor",
+      "stage": ["desk"],
+      "scale": "small"
+    },
+    {
+      "id": "server",
+      "name": "服务器",
+      "aliases": ["整机", "计算节点", "服务器整机", "server", "node"],
+      "kind": "device",
+      "part": "gpuNode",
+      "stage": ["datacenter"],
+      "scale": "large"
+    },
+    {
+      "id": "rack",
+      "name": "机柜",
+      "aliases": ["机架", "rack", "柜子"],
+      "kind": "structure",
+      "part": "rack",
+      "stage": ["datacenter"],
+      "scale": "large"
+    },
+    {
+      "id": "switch",
+      "name": "交换机",
+      "aliases": ["网络", "路由", "switch", "network"],
+      "kind": "device",
+      "part": "switch",
+      "stage": ["datacenter"],
+      "scale": "small"
+    },
+    {
+      "id": "cooling",
+      "name": "制冷",
+      "aliases": ["散热", "空调", "冷却", "液冷", "cooling", "CDU"],
+      "kind": "device",
+      "part": "cooling",
+      "stage": ["datacenter", "factory"],
+      "scale": "large"
+    },
+    {
+      "id": "power",
+      "name": "供电",
+      "aliases": ["电源", "电力", "配电", "UPS", "power"],
+      "kind": "device",
+      "part": "power",
+      "stage": ["datacenter", "factory"],
+      "scale": "large"
+    },
+    {
+      "id": "coffee",
+      "name": "咖啡",
+      "aliases": ["一杯咖啡", "美式", "浓缩", "espresso", "coffee"],
+      "kind": "vessel",
+      "part": "custom",
+      "custom": { "form": "vessel", "detail": "handle", "size": [0.95, 0.98, 0.85], "color": "#f2efe6", "accent": "#b9a48c" },
+      "stage": ["desk", "kitchen"],
+      "scale": "small",
+      "note": "杯子装液体，不要画成方块"
+    },
+    {
+      "id": "coffee-bean",
+      "name": "咖啡豆",
+      "aliases": ["咖啡生豆", "烘焙豆", "豆子", "coffee bean"],
+      "kind": "material",
+      "part": "custom",
+      "custom": { "form": "stack", "detail": "groove", "size": [0.9, 0.55, 0.9], "color": "#d9c3b6", "accent": "#6b4a33" },
+      "stage": ["kitchen"],
+      "scale": "small"
+    },
+    {
+      "id": "coffee-machine",
+      "name": "咖啡机",
+      "aliases": ["意式机", "萃取机", "espresso machine"],
+      "kind": "device",
+      "part": "custom",
+      "custom": { "form": "box", "detail": "pipe", "size": [1.3, 1.15, 0.95], "color": "#e9dfc9", "accent": "#8a7360" },
+      "stage": ["kitchen"],
+      "scale": "small"
+    },
+    {
+      "id": "kettle",
+      "name": "水壶",
+      "aliases": ["烧水壶", "壶", "kettle"],
+      "kind": "vessel",
+      "part": "custom",
+      "custom": { "form": "vessel", "detail": "handle", "size": [0.7, 0.85, 0.7], "color": "#e8e2d6", "accent": "#9a8b76" },
+      "stage": ["kitchen"],
+      "scale": "small"
+    },
+    {
+      "id": "pot",
+      "name": "锅",
+      "aliases": ["炒锅", "汤锅", "平底锅", "pot", "pan"],
+      "kind": "vessel",
+      "part": "custom",
+      "custom": { "form": "vessel", "detail": "handle", "size": [1.1, 0.55, 1.1], "color": "#d8dde4", "accent": "#7f8a99" },
+      "stage": ["kitchen"],
+      "scale": "small"
+    },
+    {
+      "id": "flour",
+      "name": "面粉",
+      "aliases": ["面团", "原料粉", "flour"],
+      "kind": "material",
+      "part": "custom",
+      "custom": { "form": "stack", "detail": "none", "size": [0.9, 0.45, 0.9], "color": "#f4f0e6", "accent": "#c9c0ad" },
+      "stage": ["kitchen", "factory"],
+      "scale": "small"
+    },
+    {
+      "id": "cell",
+      "name": "细胞",
+      "aliases": ["活细胞", "cell"],
+      "kind": "organism",
+      "part": "custom",
+      "custom": { "form": "cluster", "detail": "none", "size": [1.1, 0.95, 1.1], "color": "#f0c9c4", "accent": "#c4746c" },
+      "stage": ["body"],
+      "scale": "micro"
+    },
+    {
+      "id": "neuron",
+      "name": "神经元",
+      "aliases": ["神经细胞", "突触", "neuron"],
+      "kind": "organism",
+      "part": "custom",
+      "custom": { "form": "cluster", "detail": "none", "size": [1.2, 1.0, 1.2], "color": "#d6e8d2", "accent": "#5f9c6b" },
+      "stage": ["body"],
+      "scale": "micro"
+    },
+    {
+      "id": "brain",
+      "name": "大脑",
+      "aliases": ["脑", "脑组织", "brain"],
+      "kind": "organism",
+      "part": "custom",
+      "custom": { "form": "cluster", "detail": "none", "size": [1.6, 1.3, 1.6], "color": "#f3d0cb", "accent": "#c07a72" },
+      "stage": ["body"],
+      "scale": "small",
+      "note": "用神经元群表示，不做解剖学外形：讲机制时脑区不是重点"
+    },
+    {
+      "id": "blood",
+      "name": "血液",
+      "aliases": ["血流", "血浆", "blood"],
+      "kind": "material",
+      "part": "custom",
+      "custom": { "form": "cluster", "detail": "none", "size": [1.0, 0.7, 1.0], "color": "#f0c4c4", "accent": "#b8564f" },
+      "stage": ["body"],
+      "scale": "micro"
+    },
+    {
+      "id": "stomach",
+      "name": "胃",
+      "aliases": ["肠道", "消化系统", "stomach"],
+      "kind": "organism",
+      "part": "custom",
+      "custom": { "form": "vessel", "detail": "none", "size": [1.3, 1.0, 1.1], "color": "#f2d3cd", "accent": "#c07a72" },
+      "stage": ["body"],
+      "scale": "small"
+    },
+    {
+      "id": "liver",
+      "name": "肝脏",
+      "aliases": ["肝", "liver"],
+      "kind": "organism",
+      "part": "custom",
+      "custom": { "form": "slab", "detail": "none", "size": [1.5, 0.6, 1.1], "color": "#e8c4bb", "accent": "#a25c50" },
+      "stage": ["body"],
+      "scale": "small"
+    },
+    {
+      "id": "pill",
+      "name": "药片",
+      "aliases": ["胶囊", "药物", "pill", "drug"],
+      "kind": "material",
+      "part": "custom",
+      "custom": { "form": "cylinder", "detail": "none", "size": [0.42, 0.3, 0.42], "color": "#ffffff", "accent": "#c3cbd8" },
+      "stage": ["body", "lab"],
+      "scale": "small"
+    },
+    {
+      "id": "vaccine",
+      "name": "疫苗",
+      "aliases": ["疫苗瓶", "针剂", "vaccine"],
+      "kind": "vessel",
+      "part": "custom",
+      "custom": { "form": "cylinder", "detail": "none", "size": [0.4, 0.9, 0.4], "color": "#cfe3f5", "accent": "#5b8fc9" },
+      "stage": ["lab"],
+      "scale": "small"
+    },
+    {
+      "id": "beaker",
+      "name": "烧杯",
+      "aliases": ["试管", "锥形瓶", "beaker", "flask"],
+      "kind": "vessel",
+      "part": "custom",
+      "custom": { "form": "vessel", "detail": "none", "size": [0.55, 0.85, 0.55], "color": "#dcebf6", "accent": "#7aa8cc" },
+      "stage": ["lab"],
+      "scale": "small"
+    },
+    {
+      "id": "leaf",
+      "name": "叶片",
+      "aliases": ["树叶", "叶子", "leaf"],
+      "kind": "organism",
+      "part": "custom",
+      "custom": { "form": "slab", "detail": "none", "size": [1.4, 0.1, 0.95], "color": "#c0dd97", "accent": "#639922" },
+      "stage": ["nature", "lab"],
+      "scale": "small"
+    },
+    {
+      "id": "plant",
+      "name": "植株",
+      "aliases": ["植物", "作物", "plant", "crop"],
+      "kind": "organism",
+      "part": "custom",
+      "custom": { "form": "frame", "detail": "none", "size": [0.8, 1.3, 0.8], "color": "#c0dd97", "accent": "#3b6d11" },
+      "stage": ["nature", "factory"],
+      "scale": "human"
+    },
+    {
+      "id": "sun",
+      "name": "太阳",
+      "aliases": ["阳光", "日光", "sun", "sunlight"],
+      "kind": "signal",
+      "part": "globe",
+      "stage": ["nature"],
+      "scale": "macro"
+    },
+    {
+      "id": "atmosphere",
+      "name": "大气",
+      "aliases": ["天空", "空气层", "atmosphere"],
+      "kind": "structure",
+      "part": "custom",
+      "custom": { "form": "field", "detail": "none", "size": [2.0, 1.5, 1.6], "color": "#dcebf6", "accent": "#6fa0cc" },
+      "stage": ["nature"],
+      "scale": "macro"
+    },
+    {
+      "id": "eye",
+      "name": "眼睛",
+      "aliases": ["人眼", "视网膜", "视锥细胞", "eye"],
+      "kind": "organism",
+      "part": "custom",
+      "custom": { "form": "cluster", "detail": "none", "size": [1.0, 0.8, 1.0], "color": "#e6e0f0", "accent": "#8b6fb0" },
+      "stage": ["body"],
+      "scale": "small"
+    },
+    {
+      "id": "camera",
+      "name": "相机",
+      "aliases": ["镜头", "相机镜头", "camera", "lens"],
+      "kind": "device",
+      "part": "camera",
+      "stage": ["desk"],
+      "scale": "small"
+    },
+    {
+      "id": "photo",
+      "name": "照片",
+      "aliases": ["相纸", "成片", "相片", "photo", "print"],
+      "kind": "material",
+      "part": "photo",
+      "stage": ["desk"],
+      "scale": "small"
+    },
+    {
+      "id": "package",
+      "name": "包裹",
+      "aliases": ["快递", "纸箱", "货件", "package", "parcel"],
+      "kind": "material",
+      "part": "custom",
+      "custom": { "form": "box", "detail": "groove", "size": [0.85, 0.7, 0.85], "color": "#e8dcc6", "accent": "#a8927a" },
+      "stage": ["factory", "city"],
+      "scale": "small"
+    },
+    {
+      "id": "conveyor",
+      "name": "传送带",
+      "aliases": ["分拣线", "流水线", "conveyor"],
+      "kind": "structure",
+      "part": "custom",
+      "custom": { "form": "slab", "detail": "groove", "size": [2.2, 0.22, 0.9], "color": "#d8dde4", "accent": "#7f8a99" },
+      "stage": ["factory"],
+      "scale": "large"
+    },
+    {
+      "id": "warehouse",
+      "name": "仓库",
+      "aliases": ["仓储", "库房", "warehouse"],
+      "kind": "structure",
+      "part": "custom",
+      "custom": { "form": "frame", "detail": "none", "size": [2.2, 1.5, 1.6], "color": "#e2e6ec", "accent": "#9aa3ae" },
+      "stage": ["factory", "city"],
+      "scale": "large"
+    },
+    {
+      "id": "truck",
+      "name": "货车",
+      "aliases": ["卡车", "物流车", "truck", "van"],
+      "kind": "device",
+      "part": "custom",
+      "custom": { "form": "box", "detail": "vents", "size": [1.9, 1.1, 0.95], "color": "#dfe6ee", "accent": "#6f8ab0" },
+      "stage": ["city"],
+      "scale": "large"
+    },
+    {
+      "id": "robot-arm",
+      "name": "机械臂",
+      "aliases": ["机器人", "自动化设备", "robot arm"],
+      "kind": "device",
+      "part": "custom",
+      "custom": { "form": "frame", "detail": "pipe", "size": [1.1, 1.4, 1.1], "color": "#e6e9ef", "accent": "#8a93a3" },
+      "stage": ["factory"],
+      "scale": "large"
+    },
+    {
+      "id": "tank",
+      "name": "储罐",
+      "aliases": ["反应釜", "罐体", "tank", "reactor"],
+      "kind": "vessel",
+      "part": "custom",
+      "custom": { "form": "cylinder", "detail": "none", "size": [1.1, 1.5, 1.1], "color": "#dfe3ea", "accent": "#8e97a6" },
+      "stage": ["factory", "lab"],
+      "scale": "large"
+    },
+    {
+      "id": "pipe",
+      "name": "管道",
+      "aliases": ["管线", "输送管", "pipe", "pipeline"],
+      "kind": "structure",
+      "part": "custom",
+      "custom": { "form": "cylinder", "detail": "none", "size": [0.35, 1.6, 0.35], "color": "#cdd5e0", "accent": "#8794a8" },
+      "stage": ["factory"],
+      "scale": "large"
+    },
+    {
+      "id": "battery",
+      "name": "电池",
+      "aliases": ["电芯", "锂电池", "battery"],
+      "kind": "device",
+      "part": "custom",
+      "custom": { "form": "box", "detail": "vents", "size": [1.0, 0.8, 0.7], "color": "#dfe3ea", "accent": "#8e97a6" },
+      "stage": ["factory", "desk"],
+      "scale": "small"
+    },
+    {
+      "id": "solar-panel",
+      "name": "光伏板",
+      "aliases": ["太阳能板", "组件", "solar panel"],
+      "kind": "device",
+      "part": "custom",
+      "custom": { "form": "slab", "detail": "groove", "size": [1.9, 0.12, 1.1], "color": "#2f3d55", "accent": "#6f8ab0" },
+      "stage": ["nature", "factory"],
+      "scale": "large"
+    },
+    {
+      "id": "turbine",
+      "name": "风机",
+      "aliases": ["涡轮", "风力发电机", "turbine"],
+      "kind": "device",
+      "part": "custom",
+      "custom": { "form": "cylinder", "detail": "none", "size": [0.4, 1.7, 0.4], "color": "#eef1f5", "accent": "#94a0b2" },
+      "stage": ["nature"],
+      "scale": "large"
+    },
+    {
+      "id": "bank",
+      "name": "银行",
+      "aliases": ["央行", "商业银行", "bank"],
+      "kind": "structure",
+      "part": "custom",
+      "custom": { "form": "frame", "detail": "none", "size": [2.0, 1.5, 1.4], "color": "#e6e9ef", "accent": "#8a93a3" },
+      "stage": ["city"],
+      "scale": "large"
+    },
+    {
+      "id": "ledger",
+      "name": "账本",
+      "aliases": ["资产负债表", "账单", "ledger", "balance sheet"],
+      "kind": "data",
+      "part": "custom",
+      "custom": { "form": "slab", "detail": "screen", "size": [1.2, 0.14, 0.9], "color": "#f4f2ea", "accent": "#9a9483" },
+      "stage": ["desk", "city"],
+      "scale": "small"
+    },
+    {
+      "id": "card",
+      "name": "银行卡",
+      "aliases": ["信用卡", "支付卡", "card"],
+      "kind": "material",
+      "part": "custom",
+      "custom": { "form": "slab", "detail": "groove", "size": [0.9, 0.06, 0.6], "color": "#c9d3e2", "accent": "#5b6b85" },
+      "stage": ["desk", "city"],
+      "scale": "small"
+    },
+    {
+      "id": "cargo-ship",
+      "name": "货轮",
+      "aliases": ["集装箱船", "船", "ship"],
+      "kind": "structure",
+      "part": "custom",
+      "custom": { "form": "box", "detail": "none", "size": [2.2, 0.7, 0.9], "color": "#3f4a5c", "accent": "#8e97a6" },
+      "stage": ["city"],
+      "scale": "large"
+    }
+  ]
+}

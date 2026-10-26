@@ -1,0 +1,112 @@
+{
+  "version": 1,
+  "note": "题材因果骨架。命中就给一条可用的主干，省得每次从零编因果；没命中就现场推。chain 里的 entity 优先用词表 id，命中不了 resolve.mjs 会兜底。",
+  "chains": [
+    {
+      "id": "caffeine",
+      "topic": ["咖啡因", "咖啡", "提神", "腺苷", "咖啡为什么"],
+      "stage": "body",
+      "chain": [
+        { "entity": "coffee", "action": "喝下" },
+        { "entity": "caffeine-molecule", "action": "亲脂，穿肠壁入血" },
+        { "entity": "blood-brain-barrier", "action": "只放行亲脂小分子" },
+        { "entity": "adenosine-receptor", "action": "形状相似，抢占座位" },
+        { "entity": "neuron", "action": "困意信号没人接收" },
+        { "entity": "hydrophilic-analog", "action": "反例：换成水溶性分子，效果归零", "contrast": true }
+      ]
+    },
+    {
+      "id": "photosynthesis",
+      "topic": ["光合作用", "叶子为什么绿", "植物怎么长", "叶绿体"],
+      "stage": "body",
+      "chain": [
+        { "entity": "photon", "action": "阳光打到叶面" },
+        { "entity": "chlorophyll", "action": "吸收红光和蓝光" },
+        { "entity": "electron", "action": "被激发，开始沿链传递" },
+        { "entity": "atp", "action": "光反应把能量存进 ATP" },
+        { "entity": "co2", "action": "被固定进有机物" },
+        { "entity": "glucose", "action": "卡尔文循环造出糖" },
+        { "entity": "oxygen", "action": "水被拆开，放出氧气" },
+        { "entity": "leaf", "action": "反例：若吸收绿光，叶子不会是绿的", "contrast": true }
+      ]
+    },
+    {
+      "id": "rayleigh",
+      "topic": ["天空为什么是蓝的", "蓝天", "日落为什么红", "散射"],
+      "stage": "nature",
+      "chain": [
+        { "entity": "sun", "action": "发出含各波长的白光" },
+        { "entity": "molecule", "action": "空气分子远小于波长" },
+        { "entity": "rayleigh-scattering", "action": "短波被散射得更狠（1/λ⁴）" },
+        { "entity": "wavelength", "action": "蓝光散射强度约为红光的 5.5 倍" },
+        { "entity": "eye", "action": "三种视锥细胞把它读成蓝" },
+        { "entity": "cloud", "action": "反例：大颗粒散射与波长无关，所以云是白的", "contrast": true }
+      ]
+    },
+    {
+      "id": "llm-answer",
+      "topic": ["大模型怎么回答", "token", "推理过程", "Transformer", "GPT 原理"],
+      "stage": "desk",
+      "chain": [
+        { "entity": "desk", "action": "你敲下一行字" },
+        { "entity": "cpu", "action": "切成 token，换成编号" },
+        { "entity": "ram", "action": "拼成定长上下文" },
+        { "entity": "gpu", "action": "经 PCIe 搬进显存" },
+        { "entity": "logits", "action": "32 层矩阵乘，得到下一个词的打分" },
+        { "entity": "probability", "action": "softmax 变成概率分布" },
+        { "entity": "monitor", "action": "采样出一个 token，流回屏幕" }
+      ]
+    },
+    {
+      "id": "datacenter",
+      "topic": ["机房怎么搭", "算力集群", "液冷", "GPU 集群", "数据中心"],
+      "stage": "datacenter",
+      "chain": [
+        { "entity": "power", "action": "从变电站引入 10 MW" },
+        { "entity": "cooling", "action": "把电变成的热带走" },
+        { "entity": "rack", "action": "42U 机柜，装 8 台整机" },
+        { "entity": "server", "action": "8 卡互联，一个训练节点" },
+        { "entity": "switch", "action": "InfiniBand 把上千节点连成一张网" },
+        { "entity": "gpu", "action": "算一次前向，等一次梯度" }
+      ]
+    },
+    {
+      "id": "parcel-sorting",
+      "topic": ["快递分拣", "物流怎么运转", "包裹怎么送到", "分拣中心"],
+      "stage": "factory",
+      "chain": [
+        { "entity": "package", "action": "揽收，贴上电子面单" },
+        { "entity": "conveyor", "action": "上传送带，扫码识别" },
+        { "entity": "robot-arm", "action": "按目的地分到不同格口" },
+        { "entity": "truck", "action": "装满一车发往区域中心" },
+        { "entity": "logistics-route", "action": "干线运输，按路由中转" },
+        { "entity": "warehouse", "action": "末端网点，等快递员取走" },
+        { "entity": "conveyor", "action": "反例：人工分拣一小时 200 件，交叉带一小时 2 万件", "contrast": true }
+      ]
+    },
+    {
+      "id": "vaccine",
+      "topic": ["疫苗怎么起作用", "免疫", "抗体", "mRNA 疫苗"],
+      "stage": "body",
+      "chain": [
+        { "entity": "vaccine", "action": "注入少量抗原信息" },
+        { "entity": "cell", "action": "被激活，开始呈递抗原" },
+        { "entity": "antibody", "action": "B 细胞大量生产抗体" },
+        { "entity": "memory-cell", "action": "留下记忆细胞" },
+        { "entity": "pathogen", "action": "真实病毒入侵时被立刻识别" }
+      ]
+    },
+    {
+      "id": "rate-hike",
+      "topic": ["加息", "利率", "央行", "通胀", "货币政策"],
+      "stage": "city",
+      "chain": [
+        { "entity": "bank", "action": "央行上调政策利率" },
+        { "entity": "card", "action": "商业银行的借钱成本变高" },
+        { "entity": "ledger", "action": "贷款、房贷、企业融资一起变贵" },
+        { "entity": "concentration", "action": "需求被压下去" },
+        { "entity": "price-index", "action": "物价涨幅回落", "contrast": true }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>__TITLE__</title>
+<style>__CSS__</style>
+</head>
+<body>
+<canvas id="scene"></canvas>
+<div id="labels"></div>
+
+<header class="topbar">
+  <h1 id="title"></h1>
+  <p id="subtitle"></p>
+  <p class="q" id="question"></p>
+</header>
+
+<div class="controls">
+  <button id="btnPrev" type="button" title="上一站（←）">‹</button>
+  <button id="btnPlay" type="button" title="播放 / 暂停（空格）">⏸</button>
+  <button id="btnNext" type="button" title="下一站（→）">›</button>
+  <button id="btnReset" type="button" title="回到全景（Esc）">全</button>
+  <span id="playState">播放中</span>
+</div>
+
+<aside id="detail">
+  <button id="detailClose" type="button" title="收起">×</button>
+  <div class="d-kicker" id="d-kicker"></div>
+  <h2 id="d-name"></h2>
+  <p class="d-short" id="d-short"></p>
+  <div class="d-flow" id="d-flow"></div>
+  <p class="d-insight" id="d-insight"></p>
+  <ul class="d-bullets" id="d-bullets"></ul>
+  <div class="d-example" id="d-example"></div>
+  <ul class="d-tech" id="d-tech"></ul>
+  <p class="d-note" id="note"></p>
+</aside>
+
+<div class="hint" id="hint">左键旋转 · 右键平移 · 滚轮缩放 · 单击工位查看 · 空格暂停 · ← → 切换</div>
+
+<script>window.__CONCEPT__ = __CONCEPT_JSON__;</script>
+<script>__BUNDLE__</script>
+</body>
+</html>

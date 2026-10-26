@@ -1,0 +1,62 @@
+{
+  "version": 1,
+  "note": "场域决定地板、装饰和氛围。implemented=渲染器已支持；planned=规划中，写了会退化成 desk 的外观。",
+  "stages": [
+    {
+      "id": "desk",
+      "status": "implemented",
+      "label": "桌面 / 室内",
+      "floor": { "base": "#d9e1ec", "top": "#e9eef5", "line": "#dde4ee" },
+      "decor": "绿植 + 纸箱",
+      "use": "消费电子、办公、金融、日常生活"
+    },
+    {
+      "id": "datacenter",
+      "status": "implemented",
+      "label": "机房 / 工业",
+      "floor": { "base": "#2b323d", "top": "#3d4757", "line": "#55637a" },
+      "decor": "线缆盘 + 冷通道导光条",
+      "use": "服务器、算力、电力、重工业"
+    },
+    {
+      "id": "nature",
+      "status": "implemented",
+      "label": "自然 / 物理",
+      "floor": { "base": "#c7d8c0", "top": "#e4efdb", "line": "#dbe7d7" },
+      "decor": "绿植",
+      "use": "光学、天气、地理、天文"
+    },
+    {
+      "id": "body",
+      "status": "implemented",
+      "label": "人体 / 微观",
+      "floor": { "base": "#dcc4be", "top": "#f4e3df", "line": "#ecd9d4" },
+      "decor": "半透明细胞 + 细胞核",
+      "use": "生理机制、药物、免疫、细胞层面"
+    },
+    {
+      "id": "kitchen",
+      "status": "planned",
+      "label": "厨房",
+      "use": "食品、烹饪、酿造（当前退回 desk）"
+    },
+    {
+      "id": "lab",
+      "status": "planned",
+      "label": "实验室",
+      "use": "化学、材料、生物实验（当前退回 desk）"
+    },
+    {
+      "id": "factory",
+      "status": "planned",
+      "label": "工厂",
+      "use": "制造、装配、分拣（当前退回 desk）"
+    },
+    {
+      "id": "city",
+      "status": "planned",
+      "label": "城市",
+      "use": "金融、物流、公共服务（当前退回 desk）"
+    }
+  ]
+}

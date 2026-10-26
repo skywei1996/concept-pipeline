@@ -1,0 +1,252 @@
+{
+  "id": "rack-io",
+  "title": "机柜的四进一出",
+  "subtitle": "四根线进去，一根热管出来",
+  "stage": "datacenter",
+  "form": "pipeline",
+  "question": "一个 GPU 机柜上到底接了几根线？电和水是怎么走的？",
+  "answer": "四根线进柜，一根热管出柜。",
+  "note": "数值为示意，与 concepts/datacenter.json 的 10 MW 园区、80 kW/柜、32→45 °C 保持一致。",
+  "answerTemplate": "一个机柜上接着四根线：10 kV 的电、32 °C 的水、400G 的光、1G 的带外。它们在 42U 里汇合，电在芯片上几乎全部变成热，再由同一根水管带出机房。所以「{q}」的答案最后落在一句话上：算力是电的形状，热是电的账单——机房从不消灭热，只负责把它搬到室外。",
+  "stations": [
+    {
+      "id": "feed",
+      "entity": "power",
+      "role": "topic",
+      "type": "step",
+      "part": "power",
+      "name": "进线 · 10 kV",
+      "grid": [0, 0],
+      "inputLabel": "双路市电",
+      "outputLabel": "400 V 进柜",
+      "short": "市电先过变压器，再过 UPS，才轮到机柜",
+      "insight": "UPS 保的不是「停电几小时」，而是两次市电互投之间那几十毫秒。GPU 电源撑不住这个空档，整柜会直接重启，损失比停电本身还大。",
+      "bullets": [
+        "10 MW 园区，双路市电互投",
+        "互投空档 10~300 ms，GPU 扛不住",
+        "UPS 满载撑 5~10 分钟，够柴油机起"
+      ],
+      "example": {
+        "in": "园区 10 MW · 双路 10 kV",
+        "out": "400 V · 每柜 80 kW",
+        "meta": "变压器效率约 98%，2N 配置"
+      },
+      "tech": [
+        "链路：10 kV 进线 → 变压器 → UPS → 母排 → 机柜 PDU",
+        "2N 的代价是容量翻倍，实际多用 N+1 折中",
+        "柴油发电机 10 s 内并机，UPS 只需撑到那一刻"
+      ]
+    },
+    {
+      "id": "cold",
+      "entity": "chiller",
+      "role": "principle",
+      "type": "why",
+      "part": "cooling",
+      "name": "冷 · 32°C 进水",
+      "grid": [1, 0],
+      "inputLabel": "回水 45°C",
+      "outputLabel": "供水 32°C",
+      "short": "干冷器把 45 °C 的水吹回 32 °C，再送进柜",
+      "insight": "32 °C 的水听着不像「冷」，但它比芯片的 85 °C 低 50 K，足够把热搬走。水温抬到这么高，反而能直接用室外空气散热，冷水机组整台省掉。",
+      "bullets": [
+        "进水 32 °C，回水 45 °C，温差 13 K",
+        "80 kW ÷（4.18 × 13）≈ 1.5 L/s",
+        "水温够高，干冷器就能直接散热"
+      ],
+      "example": {
+        "in": "冷板回水 45 °C",
+        "out": "供水 32 °C · 约 1.9 L/s",
+        "meta": "PUE 1.1~1.2，比风冷低约 0.3"
+      },
+      "tech": [
+        "CDU 做一次侧/二次侧换热，二次侧进机柜",
+        "干冷器靠室外空气，湿球温度决定散热上限",
+        "45 °C 回水可直接做园区供暖，再压一截 PUE"
+      ]
+    },
+    {
+      "id": "fiber",
+      "entity": "lossless-fabric",
+      "role": "principle",
+      "type": "why",
+      "part": "switch",
+      "name": "光 · 400G 出柜",
+      "grid": [2, 0],
+      "inputLabel": "64 卡 / 柜",
+      "outputLabel": "1.6 Tb/s",
+      "short": "每张卡一个 400G 口，出柜就进叶交换机",
+      "insight": "训练里网络慢不是「等一会儿」，是全部卡一起停。all-reduce 是同步的，最慢那条链路决定整个 step 的时间——一张卡慢 10%，一万张卡一起慢 10%。",
+      "bullets": [
+        "单卡 400G，一柜 64 口",
+        "叶脊 1:1 收敛，任意两卡三跳内",
+        "all-reduce 每步约 1.2 TB（70B 示意）"
+      ],
+      "example": {
+        "in": "每柜 64 张 GPU · 64 个 400G 口",
+        "out": "两级胖树 · 1.6 Tb/s 上行",
+        "meta": "收敛比 1:1，跳数 ≤3"
+      },
+      "tech": [
+        "NVLink 管柜内（900 GB/s），网口管柜间",
+        "RoCEv2 靠 PFC + ECN 做无损，配错比 TCP 还慢",
+        "拓扑感知的 ring/tree all-reduce 能少走一半路"
+      ]
+    },
+    {
+      "id": "oob",
+      "entity": "bmc",
+      "role": "principle",
+      "type": "step",
+      "part": "custom",
+      "custom": {
+        "form": "box",
+        "detail": "none",
+        "size": [1.0, 0.38, 0.82],
+        "color": "#dbe7f2",
+        "accent": "#5b7fa6"
+      },
+      "name": "管 · 1G 不睡觉",
+      "grid": [3, 0],
+      "inputLabel": "带外 1 G",
+      "outputLabel": "远程电源",
+      "short": "一条比数据网慢 400 倍的线，业务网挂了它还在",
+      "insight": "带外只有 1G，比 400G 数据网慢 400 倍，可它是唯一在系统宕机、甚至关机时还能用的通路：能按电源键、读温度、捞日志，人不用进机房。",
+      "bullets": [
+        "带外 1 G，独立于业务网",
+        "BMC 待机功耗约 5~10 W",
+        "关机状态也能读温度、按电源"
+      ],
+      "example": {
+        "in": "带外 1 G · 独立交换机",
+        "out": "远程开关机 · 200+ 项传感器",
+        "meta": "每台整机 1 个 BMC 口，与业务网物理隔离"
+      },
+      "tech": [
+        "BMC 是独立小系统，主 CPU 挂了它仍在线",
+        "DCGM 走业务网采 GPU 指标，BMC 只管整机",
+        "带外与业务网要分开走线，避免一起被打断"
+      ]
+    },
+    {
+      "id": "rack",
+      "entity": "rack",
+      "role": "topic",
+      "type": "step",
+      "part": "rack",
+      "name": "柜 · 42U 汇流",
+      "grid": [3, 1],
+      "inputLabel": "四根线",
+      "outputLabel": "64 卡 / 80 kW",
+      "short": "电从顶上、水从后面、光和带外从走线架进来",
+      "insight": "机柜不是「插上就用」的铁箱子，四个入口在物理上是分开的：母排从上，分集水器从后，光纤走顶，带外贴着光纤。走错一侧，门关不上，风道也废了。",
+      "bullets": [
+        "1U = 44.45 mm，42U 约 1.87 m",
+        "8 台 8 卡整机 = 64 卡 = 80 kW",
+        "前门开孔率 >70%，否则风量减半"
+      ],
+      "example": {
+        "in": "电 / 水 / 光 / 带外 四路",
+        "out": "64 GPU · 80 kW · 42U",
+        "meta": "柜内 8 台整机 × 10 kW"
+      },
+      "tech": [
+        "上走线：母排 + 光纤；后走水：分集水器分歧",
+        "空 U 位要插盲板，漏风等于给风道短路",
+        "按功率分区上架，避免单柜局部热点"
+      ]
+    },
+    {
+      "id": "chip",
+      "entity": "gpu",
+      "role": "principle",
+      "type": "why",
+      "part": "gpu",
+      "name": "芯 · 0.8V 700W",
+      "grid": [2, 1],
+      "inputLabel": "48 V 直流",
+      "outputLabel": "700 W 热",
+      "short": "电在芯片里几乎全变成热，一点没剩下",
+      "insight": "0.8 V 不是为省电，是被功耗公式逼的：功耗随电压平方下降，所以电压一代比一代低。代价是同样 700 W 下电流要到 900 A，先到极限的是铜排和引脚。",
+      "bullets": [
+        "单卡 700 W，一柜 64 卡",
+        "0.8 V × 900 A ≈ 720 W",
+        "电几乎 100% 变热，没有「用完」"
+      ],
+      "example": {
+        "in": "48 V → 0.8 V（VRM 降压）",
+        "out": "700 W 全部变热",
+        "meta": "VRM 效率约 90%，损耗也在柜内变热"
+      },
+      "tech": [
+        "动态功耗 ∝ C·V²·f，降压比降频更省",
+        "VRM 要贴近芯片几厘米内，否则 I²R 吃掉几个点",
+        "结温 85 °C 是上限，到点就降频"
+      ]
+    },
+    {
+      "id": "heat",
+      "entity": "cold-plate",
+      "role": "principle",
+      "type": "step",
+      "part": "custom",
+      "custom": {
+        "form": "slab",
+        "detail": "pipe",
+        "size": [1.3, 0.16, 1.05],
+        "color": "#d6e6f2",
+        "accent": "#3f7fb4"
+      },
+      "name": "热 · 45°C 出柜",
+      "grid": [1, 1],
+      "inputLabel": "芯片 85°C",
+      "outputLabel": "回水 45°C",
+      "short": "冷板贴着芯片，热进水里，经 CDU 送去干冷器",
+      "insight": "机房不「消灭」热，只搬运：10 MW 电进去，就有 10 MW 热出来，一度不少。所谓制冷，其实是把热从芯片搬到室外空气里，搬得越省力，PUE 越低。",
+      "bullets": [
+        "10 MW 进 = 10 MW 出，热守恒",
+        "冷板只盖 GPU/CPU，内存仍靠风",
+        "45 °C 回水可回收给园区供暖"
+      ],
+      "example": {
+        "in": "冷板进水 32 °C",
+        "out": "回水 45 °C · 温差 13 K",
+        "meta": "单柜 80 kW，流量约 1.9 L/s"
+      },
+      "tech": [
+        "冷板 → 分集水器 → CDU → 干冷器 → 大气",
+        "一次侧（室外）与二次侧（机柜）在 CDU 换热",
+        "浸没式能做到 100 kW/柜，但换卡要吊装"
+      ]
+    },
+    {
+      "id": "dry",
+      "entity": "rack",
+      "role": "contrast",
+      "type": "contrast",
+      "part": "rack",
+      "name": "反例 · 只接电和网",
+      "grid": [0, 1],
+      "inputLabel": "80 kW 柜",
+      "outputLabel": "只跑 30 kW",
+      "short": "少接水和带外，柜子照样转，但跑不满也看不见",
+      "insight": "少一根水管，柜子不会立刻坏，只是算力打四折：风冷的物理上限约 30 kW/柜，80 kW 的柜子只能装 3 台整机。少一根带外线，机器挂了你得自己走进机房按电源键。",
+      "bullets": [
+        "风冷柜上限约 30 kW/柜",
+        "80 kW 柜只能装 3 台整机（30 kW）",
+        "没带外，一次重启就要进一次机房"
+      ],
+      "example": {
+        "in": "80 kW 柜 · 只接电和光",
+        "out": "只跑得动 30 kW",
+        "meta": "30 ÷ 80 ≈ 38%，风冷与液冷的差距"
+      },
+      "tech": [
+        "降频是保护：结温超 85 °C 先降时钟",
+        "没有带外，故障只能人到现场",
+        "少接液冷的代价不是坏，是算力打折"
+      ]
+    }
+  ],
+  "order": ["feed", "cold", "fiber", "oob", "rack", "chip", "heat", "dry"]
+}
